@@ -77,7 +77,7 @@ $time = microtime(true);
 
 $scheduler = new Scheduler;
 /**
- *	第一个参数接受一个迭代生成器
+ *  第一个参数接受一个迭代生成器
  *  第二个参数接收一个回调函数，会把请求的内容返回
  */
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
