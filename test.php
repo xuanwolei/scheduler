@@ -7,7 +7,10 @@ $time = microtime(true);
 
 //并行化调用
 $scheduler = new Scheduler;
-//第二个参数接收一个回调函数，会把请求的内容返回
+/**
+ *	第一个参数接受一个迭代生成器
+ *  第二个参数接收一个回调函数，会把请求的内容返回
+ */
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
 	var_dump($data);
 });
@@ -29,5 +32,5 @@ $scheduler->run();
 // $curl->callWebServer("http://demo.xuanwolei.cn/sleep.php"); //3秒
 //共耗时9.3秒
 
-//输入运行时间
+//输出运行时间
 echo "run time:".(microtime(true) - $time);
