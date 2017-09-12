@@ -81,7 +81,7 @@ $scheduler = new Scheduler;
  *  第二个参数接收一个回调函数，会把请求的内容返回
  */
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
-	//输入请求返回内容
+	//输出请求返回内容
 	var_dump($data);
 });
 $scheduler->newTask(Curl::request("http://www.ali213.net/"));
