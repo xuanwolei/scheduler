@@ -13,6 +13,8 @@ curl扩展
 
 ## 使用示例 ##
 
+### 并行化调用 ###
+
 ```php
 include "Scheduler/Autoload.php";
 use Scheduler\Scheduler;
@@ -39,6 +41,8 @@ $scheduler->run();
 echo "run time:".(microtime(true) - $time); //3.1秒
 ```
 上面的请求并行化调用耗时在3.1秒左右，下面我们看看串行化调用
+
+### 串行化调用 ###
 
 ```php
 include "Scheduler/Autoload.php";
