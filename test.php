@@ -18,6 +18,9 @@ $scheduler->newTask(Curl::request("http://www.ali213.net/"));
 $scheduler->newTask(Curl::request("http://www.ali213.net/"));
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));
+//加入2个生成器
+$scheduler->newTask(generator());
+$scheduler->newTask(generator());
 //运行
 $scheduler->run();
 //共耗时3.1秒
@@ -34,3 +37,14 @@ $scheduler->run();
 
 //输出运行时间
 echo "run time:".(microtime(true) - $time);
+
+/**
+ *	生成器
+ */
+function generator(){
+	for ($i=0; $i < 10; $i++) {
+		//这里可以是业务逻辑，假设每次需要0.1秒
+		usleep(100000);
+		yield;
+	}
+}

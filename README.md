@@ -66,4 +66,50 @@ echo "run time:".(microtime(true) - $time); //9.3秒
 
 一共耗时9.3秒，可见对于响应时间较长的接口并行化调用带来的提升是巨大的
 
+### 并行化同时加入生成器 ###
+
+```php
+include "Scheduler/Autoload.php";
+use Scheduler\Scheduler;
+use Scheduler\Curl;
+
+$time = microtime(true);
+
+$scheduler = new Scheduler;
+/**
+ *	第一个参数接受一个迭代生成器
+ *  第二个参数接收一个回调函数，会把请求的内容返回
+ */
+$scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
+	//输入请求返回内容
+	var_dump($data);
+});
+$scheduler->newTask(Curl::request("http://www.ali213.net/"));
+$scheduler->newTask(Curl::request("http://www.ali213.net/"));
+$scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));
+//加入2个生成器
+$scheduler->newTask(generator());
+$scheduler->newTask(generator());
+//运行
+$scheduler->run();
+
+//输出运行时间
+echo "run time:".(microtime(true) - $time); //3.4秒
+
+/**
+ *	生成器:执行完需要1秒
+ */
+function generator(){
+	for ($i=0; $i < 10; $i++) {
+		//这里可以是业务逻辑，假设每次需要0.1秒
+		usleep(100000);
+		yield;
+	}
+}
+```
+
+加入2个需要运行1秒的生成器后运行时间是3.4秒，比之前多了0.3秒，相当于节省了1.7秒时间。
+
+
+
 
