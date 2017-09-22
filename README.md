@@ -30,10 +30,11 @@ $scheduler = new Scheduler;
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
 	//输入请求返回内容
 	var_dump($data);
-});
-$scheduler->newTask(Curl::request("http://www.ali213.net/"));
-$scheduler->newTask(Curl::request("http://www.ali213.net/"));
-$scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));
+});//3秒
+$scheduler->newTask(Curl::request("http://www.ali213.net/"));//0.1秒
+$scheduler->newTask(Curl::request("http://www.ali213.net/"));//0.1秒
+$scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));//3秒
+$scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));//3秒
 //运行
 $scheduler->run();
 
