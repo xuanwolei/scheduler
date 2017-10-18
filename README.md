@@ -7,7 +7,7 @@ php基于yiled实现的并行rpc调度器
 
 ### 版本要求 ###
 
-php >= 5.5
+php >= 5.6
 
 curl扩展
 
