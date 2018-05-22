@@ -36,7 +36,7 @@ $scheduler->run();
 //共耗时9.3秒
 
 //输出运行时间
-echo "run time:".(microtime(true) - $time);
+echo "run time:".bcsub(microtime(true),$time,2);
 
 /**
  *	生成器

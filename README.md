@@ -39,7 +39,7 @@ $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));//3秒
 $scheduler->run();
 
 //输出运行时间
-echo "run time:".(microtime(true) - $time); //3.1秒
+echo "run time:".bcsub(microtime(true),$time,2); //3.1秒
 ```
 上面的请求并行化调用耗时在3.1秒左右，下面我们看看串行化调用
 
@@ -62,7 +62,7 @@ $curl->callWebServer("http://demo.xuanwolei.cn/sleep.php"); //3秒
 $curl->callWebServer("http://demo.xuanwolei.cn/sleep.php"); //3秒
 
 //输出运行时间
-echo "run time:".(microtime(true) - $time); //9.3秒
+echo "run time:".bcsub(microtime(true),$time,2); //9.3秒
 ```
 
 一共耗时9.3秒，可见对于响应时间较长的接口并行化调用带来的提升是巨大的
@@ -95,7 +95,7 @@ $scheduler->newTask(generator());
 $scheduler->run();
 
 //输出运行时间
-echo "run time:".(microtime(true) - $time); //3.4秒
+echo "run time:".bcsub(microtime(true), $time, 2); //3.4秒
 
 /**
  *	生成器:执行完需要1秒
