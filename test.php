@@ -4,7 +4,6 @@ use Scheduler\Scheduler;
 use Scheduler\Curl;
 
 $time = microtime(true);
-
 //并行化调用
 $scheduler = new Scheduler;
 /**
@@ -16,7 +15,9 @@ $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), functio
 });
 $scheduler->newTask(Curl::request("http://www.ali213.net/"));
 $scheduler->newTask(Curl::request("http://www.ali213.net/"));
-$scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));
+$scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
+	var_dump($data);
+});
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));
 //加入2个生成器
 $scheduler->newTask(generator());
