@@ -1,5 +1,5 @@
 <?php
-include "Scheduler/Autoload.php";
+include "src/Autoload.php";
 use Scheduler\Scheduler;
 use Scheduler\Curl;
 
