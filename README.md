@@ -13,9 +13,10 @@ curl扩展
 
 ### composer安装 ### 
 
+```shell
 composer require ybc429710096/scheduler dev-master
+```
 
-ybc429710096/scheduler
 ## 使用示例 ##
 
 ### 并行化调用 ###
