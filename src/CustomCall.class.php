@@ -4,6 +4,8 @@ namespace Scheduler;
 Class CustomCall{
 	protected $callback;
 
+    CONST RESULT_KEY = '@result';
+
 	public function __construct(callback $callback){
 		$this->callback = $callback;
 	}
@@ -14,6 +16,6 @@ Class CustomCall{
     }
 
     public static function returnReust($data){
-    	return ['@result', $data];
+    	return [self::RESULT_KEY, $data];
     }
 }

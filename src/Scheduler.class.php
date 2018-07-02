@@ -43,7 +43,7 @@ Class Scheduler {
 		    if ($retval instanceof CustomCall) {
 		        $retval($task, $this);
 		        continue;
-		    } elseif (is_array($retval) && $retval['0'] == '@result') {
+		    } elseif (is_array($retval) && $retval['0'] == CustomCall::RESULT_KEY) {
 		    	//如果存在回调函数
 		    	if (!empty($this->taskCall[$taskId])) {
 		    		$callback = $this->taskCall[$taskId];
@@ -73,8 +73,7 @@ Class Scheduler {
 	 	if (!$delQueue) {
 	 		return true;
 	 	}
-	    // This is a bit ugly and could be optimized so it does not have to walk the queue,
-	    // but assuming that killing tasks is rather rare I won't bother with it now
+	    
 	    foreach ($this->taskQueue as $i => $task) {
 	        if ($task->getTaskId() === $tid) {
 	            unset($this->taskQueue[$i]);
