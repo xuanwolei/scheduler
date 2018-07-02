@@ -85,16 +85,16 @@ Class Curl {
         }
         curl_setopt($this->_ch, CURLOPT_HEADER, true);
         curl_setopt($this->_ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($this->_ch, CURLOPT_FRESH_CONNECT, true);
         if ($this->multiOn) {
             //多线程
             $this->_mh = curl_multi_init();
-            curl_multi_add_handle($this->_mh, $this->_ch);
+            $reulst = curl_multi_add_handle($this->_mh, $this->_ch);
         }
     }
 
     private function _close() {
-        if (is_resource($this->_ch)) {
+        //多线程模式不立即关闭
+        if (is_resource($this->_ch) && !$this->multiOn) {
             curl_close($this->_ch);
         }
 
@@ -191,14 +191,17 @@ Class Curl {
     private function _executeMulti(){
         do {
             $mrc = curl_multi_exec($this->_mh, $active);
-            yield null;  //先去请求，不用等待结果
-        } while ($active > 0); //active=0代表请求完成
+            yield null;  //协程切换
+        } while ($active > 0);
         $response = curl_multi_getcontent($this->_ch);
         yield CustomCall::returnReust($response);
         return false;
     }
 
     public function __destruct(){
+        if (is_resource($this->_ch)) {
+            curl_close($this->_ch);
+        }
         if ($this->multiOn) {
             curl_multi_remove_handle($this->_mh, $this->_ch);
             curl_multi_close($this->_mh);

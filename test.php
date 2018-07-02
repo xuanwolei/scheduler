@@ -13,8 +13,6 @@ $scheduler = new Scheduler;
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
 	var_dump($data);
 });
-$scheduler->newTask(Curl::request("http://www.ali213.net/"));
-$scheduler->newTask(Curl::request("http://www.ali213.net/"));
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), function($data, Scheduler $scheduler){
 	var_dump($data);
 });
@@ -24,7 +22,7 @@ $scheduler->newTask(generator());
 $scheduler->newTask(generator());
 //运行
 $scheduler->run();
-//共耗时3.1秒
+//共耗时3.4秒
 
 //平常的串行调用
 // $curl = new Curl();
