@@ -199,12 +199,13 @@ Class Curl {
     }
 
     public function __destruct(){
-        if (is_resource($this->_ch)) {
-            curl_close($this->_ch);
-        }
-        if ($this->multiOn) {
+        if (is_resource($this->_mh)) {
             curl_multi_remove_handle($this->_mh, $this->_ch);
             curl_multi_close($this->_mh);
         }
+        if (is_resource($this->_ch)) {
+            curl_close($this->_ch);
+        }
+        
     }
 }
