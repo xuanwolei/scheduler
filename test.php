@@ -18,8 +18,8 @@ $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"), functio
 });
 $scheduler->newTask(Curl::request("http://demo.xuanwolei.cn/sleep.php"));
 //加入2个生成器
-$scheduler->newTask(generator());
-$scheduler->newTask(generator());
+// $scheduler->newTask(generator());
+// $scheduler->newTask(generator());
 //运行
 $scheduler->run();
 //共耗时3.4秒

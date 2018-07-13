@@ -195,6 +195,7 @@ Class Curl {
         } while ($active > 0);
         $response = curl_multi_getcontent($this->_ch);
         yield CustomCall::returnReust($response);
+        $this->__destruct();
         return false;
     }
 
