@@ -3,8 +3,6 @@ namespace Scheduler;
 use \SplQueue;
 use \Generator;
 use \Closure;
-include_once "CustomCall.class.php";
-include_once "Task.class.php";
 
 //调度程序
 Class Scheduler {
